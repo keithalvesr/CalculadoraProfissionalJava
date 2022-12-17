@@ -64,5 +64,21 @@ public class main {
 		orcamentoFinal.valorFinal = (valorFinal * 0.3) + valorFinal;
 
 		System.out.println("O valor final do projeto é de R$" + orcamentoFinal.valorFinal);
+		System.out.println("O total de horas destinado a esse projeto é de " + orcamentoFinal.totalHoras);
+
+
+		ConexaoMySQL dbSql = new ConexaoMySQL();
+		String sql = "CREATE TABLE `sys`.`orcamento` (" +
+			"`id_orcamento` INT NOT NULL AUTO_INCREMENT," +
+			"`valor_final` VARCHAR(45) NULL," +
+			"`total_horas` VARCHAR(45) NULL," +
+			"PRIMARY KEY (`id_orcamento`));";
+
+		dbSql.OpenDatabase();
+		dbSql.ExecutaQuery(sql);
+
+		sql = "insert into `sys`.`orcamento` (valor_final, total_horas) " +
+					"values (" + orcamentoFinal.valorFinal + ", " + orcamentoFinal.totalHoras + ");";
+		dbSql.ExecutaQuery(sql);
 	}
 }
